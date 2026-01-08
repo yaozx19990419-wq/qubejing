@@ -11,10 +11,8 @@ document.addEventListener("alpine:init", () => {
     copyBtnText: "Copy",
 
     images: {
-      original:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&w=800&q=80",
-      processed:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&w=800&q=80",
+      original: "img/1766567900471.jpg",
+      processed: "img/1766567900471-ClearBG.png",
     },
     singleFileName: "demo-image.jpg",
     batchZipBlob: null,
