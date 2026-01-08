@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block access to sensitive files
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /logs/
+
+# Sitemap location
+Sitemap: https://clearbg.ai/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

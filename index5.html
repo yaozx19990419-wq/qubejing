@@ -9,6 +9,46 @@
       content="Remove image backgrounds in 5 seconds. Change backgrounds, batch process, and download HD. 100% Free."
     />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://clearbg.ai/" />
+    <meta
+      property="og:title"
+      content="ClearBG AI - 100% Free Batch Background Remover & Editor"
+    />
+    <meta
+      property="og:description"
+      content="Remove image backgrounds in 5 seconds with AI. Change backgrounds, batch process up to 10 files, and download HD results. Completely free, no registration required."
+    />
+    <meta property="og:image" content="https://clearbg.ai/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="ClearBG AI" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="ClearBG AI - 100% Free Batch Background Remover & Editor"
+    />
+    <meta
+      name="twitter:description"
+      content="Remove image backgrounds in 5 seconds with AI. Change backgrounds, batch process up to 10 files, and download HD results. Completely free!"
+    />
+    <meta name="twitter:image" content="https://clearbg.ai/twitter-image.jpg" />
+    <meta name="twitter:site" content="@clearbgai" />
+
+    <!-- Additional SEO meta tags -->
+    <meta
+      name="keywords"
+      content="background remover, remove background from image, AI background removal, free online photo editor, transparent background, batch image processing, photo background changer"
+    />
+    <meta name="author" content="ClearBG AI" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script
@@ -30,6 +70,91 @@
     <link rel="stylesheet" href="style.css" />
 
     <script src="tailwind.config.js"></script>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://clearbg.ai/#organization",
+            "name": "ClearBG AI",
+            "url": "https://clearbg.ai",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://clearbg.ai/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "description": "100% Free AI-powered background remover. Remove image backgrounds in 5 seconds, batch process up to 10 files, and download HD results.",
+            "foundingDate": "2024",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "privacy@clearbg.example",
+              "contactType": "customer service"
+            },
+            "sameAs": []
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://clearbg.ai/#webapp",
+            "name": "ClearBG AI Background Remover",
+            "url": "https://clearbg.ai",
+            "description": "Free online background remover using AI. Upload images, remove backgrounds automatically, change backgrounds, and batch process multiple files.",
+            "applicationCategory": "WebApplication",
+            "operatingSystem": "Web Browser",
+            "browserRequirements": "Modern web browser with JavaScript enabled",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "featureList": [
+              "AI-powered background removal",
+              "Batch processing (up to 10 files)",
+              "Multiple background options",
+              "HD quality output",
+              "Privacy protection (60-minute auto-deletion)",
+              "No registration required"
+            ],
+            "screenshot": "https://clearbg.ai/screenshot.png",
+            "author": {
+              "@id": "https://clearbg.ai/#organization"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is this tool really free?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! It is completely free. We do not charge for credits, and you can download HD images without any watermark."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to register?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. You can use the tool immediately without creating an account or logging in."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my data safe?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. All uploaded images are processed automatically and deleted from our servers after 60 minutes."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body
@@ -109,8 +234,10 @@
         <p
           class="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto mb-10"
         >
-          Stop paying for simple edits. Upload images, change backgrounds, or
-          batch process up to 10 files. All in your browser.
+          Stop paying for simple edits. Upload photos and remove backgrounds
+          online instantly with our AI background remover. Change photo
+          backgrounds, batch process multiple images, and download transparent
+          PNG files. All in your browser, completely free.
         </p>
 
         <div class="relative max-w-7xl mx-auto animate-float">
@@ -300,11 +427,13 @@
                       <i class="fa-solid fa-cloud-arrow-up text-3xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">
-                      Click to Upload Images
+                      Upload Photos for Background Removal
                     </h3>
                     <p class="text-slate-500 text-sm font-medium">
-                      Max <span class="text-brand-600">10 files</span> per
-                      batch. Up to 10MB each.
+                      Batch process up to
+                      <span class="text-brand-600">10 images</span> at once.
+                      Supports JPG, PNG, WebP files up to 10MB each. Remove
+                      backgrounds online instantly.
                     </p>
                   </div>
 
@@ -393,9 +522,11 @@
             >
               <i class="fa-solid fa-cloud-arrow-up text-3xl text-brand-600"></i>
             </div>
-            <h3 class="text-xl font-bold mb-3">1. Upload</h3>
+            <h3 class="text-xl font-bold mb-3">1. Upload Images</h3>
             <p class="text-slate-500 text-sm leading-relaxed">
-              Drag & drop images.<br />Batch upload up to 10 files.
+              Drag & drop photos or click to browse. Upload multiple images for
+              batch background removal. Supports JPG, PNG, and other common
+              formats.
             </p>
           </div>
           <div class="relative z-10 group">
@@ -406,9 +537,11 @@
                 class="fa-solid fa-wand-magic-sparkles text-3xl text-purple-600"
               ></i>
             </div>
-            <h3 class="text-xl font-bold mb-3">2. Edit & Refine</h3>
+            <h3 class="text-xl font-bold mb-3">2. AI Background Removal</h3>
             <p class="text-slate-500 text-sm leading-relaxed">
-              Change background color<br />or keep it transparent.
+              Our AI automatically detects and removes image backgrounds. Choose
+              from transparent background, white background, or custom colors
+              for your photos.
             </p>
           </div>
           <div class="relative z-10 group">
@@ -417,9 +550,11 @@
             >
               <i class="fa-solid fa-download text-3xl text-green-500"></i>
             </div>
-            <h3 class="text-xl font-bold mb-3">3. Download Free</h3>
+            <h3 class="text-xl font-bold mb-3">3. Download HD Results</h3>
             <p class="text-slate-500 text-sm leading-relaxed">
-              Get HD images instantly.<br />No watermark, no cost.
+              Download your processed images in high definition. No watermarks,
+              no quality loss. Perfect for e-commerce, social media, and
+              professional use.
             </p>
           </div>
         </div>
@@ -500,6 +635,57 @@
                   class="p-4 border-b border-slate-50 text-center text-slate-500"
                 >
                   Preview Only
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="p-4 border-b border-slate-50 font-semibold text-slate-700"
+                >
+                  Image Formats
+                </td>
+                <td
+                  class="p-4 border-b border-brand-50 bg-brand-50/20 text-center font-bold text-brand-700"
+                >
+                  JPG, PNG, WebP, BMP
+                </td>
+                <td
+                  class="p-4 border-b border-slate-50 text-center text-slate-500"
+                >
+                  Limited Support
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="p-4 border-b border-slate-50 font-semibold text-slate-700"
+                >
+                  Privacy & Security
+                </td>
+                <td
+                  class="p-4 border-b border-brand-50 bg-brand-50/20 text-center font-bold text-brand-700"
+                >
+                  60-Min Auto-Delete
+                </td>
+                <td
+                  class="p-4 border-b border-slate-50 text-center text-slate-500"
+                >
+                  Data Stored Indefinitely
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="p-4 border-b border-slate-50 font-semibold text-slate-700"
+                >
+                  Usage Rights
+                </td>
+                <td
+                  class="p-4 border-b border-brand-50 bg-brand-50/20 text-center font-bold text-brand-700"
+                >
+                  Commercial Use Allowed
+                </td>
+                <td
+                  class="p-4 border-b border-slate-50 text-center text-slate-500"
+                >
+                  Watermarked or Restricted
                 </td>
               </tr>
             </tbody>
@@ -586,19 +772,98 @@
               </div>
             </div>
           </div>
+          <div
+            class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden"
+          >
+            <button
+              @click="active = (active === 4 ? null : 4)"
+              class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors"
+            >
+              <span class="font-semibold text-slate-900"
+                >What image formats do you support?</span
+              >
+              <i
+                class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"
+                :class="active === 4 ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <div x-show="active === 4" x-collapse x-cloak>
+              <div
+                class="px-6 pb-4 text-slate-500 text-sm leading-relaxed border-t border-slate-100 mt-2 pt-2"
+              >
+                We support all common image formats including JPG, PNG, WebP,
+                and BMP. For best results with transparent backgrounds, we
+                recommend uploading PNG files.
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden"
+          >
+            <button
+              @click="active = (active === 5 ? null : 5)"
+              class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors"
+            >
+              <span class="font-semibold text-slate-900"
+                >Can I use this for commercial purposes?</span
+              >
+              <i
+                class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"
+                :class="active === 5 ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <div x-show="active === 5" x-collapse x-cloak>
+              <div
+                class="px-6 pb-4 text-slate-500 text-sm leading-relaxed border-t border-slate-100 mt-2 pt-2"
+              >
+                Yes! Our processed images are yours to use for any purpose -
+                commercial, personal, or professional. No watermarks, no
+                restrictions, and no attribution required.
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden"
+          >
+            <button
+              @click="active = (active === 6 ? null : 6)"
+              class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none hover:bg-slate-100 transition-colors"
+            >
+              <span class="font-semibold text-slate-900"
+                >How accurate is the AI background removal?</span
+              >
+              <i
+                class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"
+                :class="active === 6 ? 'rotate-180' : ''"
+              ></i>
+            </button>
+            <div x-show="active === 6" x-collapse x-cloak>
+              <div
+                class="px-6 pb-4 text-slate-500 text-sm leading-relaxed border-t border-slate-100 mt-2 pt-2"
+              >
+                Our AI background removal technology is highly accurate for most
+                images, especially product photos and simple subjects. For
+                complex images with fine details like hair or fur, you may need
+                minor manual adjustments using the background options.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <footer class="bg-white py-12 border-t border-slate-100">
+    <footer class="bg-black py-12">
       <div
-        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500"
+        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-300"
       >
-        <div class="font-bold text-slate-900 text-lg font-sans">ClearBG AI</div>
+        <div class="font-bold text-white text-lg font-sans">ClearBG AI</div>
         <div class="flex gap-6">
-          <a href="#" class="hover:text-brand-600">Privacy</a>
-          <a href="#" class="hover:text-brand-600">Terms</a>
-          <a href="#" class="hover:text-brand-600">Twitter</a>
+          <a href="privacy.html" class="hover:text-white transition-colors"
+            >Privacy Policy</a
+          >
+          <a href="about.html" class="hover:text-white transition-colors"
+            >About Us</a
+          >
         </div>
         <div>&copy; 2024 ClearBG Inc.</div>
       </div>
