@@ -26,9 +26,8 @@ document.addEventListener("alpine:init", () => {
       this.isProcessing = false;
       this.bgColor = "transparent"; // 重置颜色
       this.$refs.fileInput.value = "";
-      this.images.original =
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&w=800&q=80";
-      this.images.processed = this.images.original;
+      this.images.original = "img/1766567900471.jpg";
+      this.images.processed = "img/1766567900471-ClearBG.png";
     },
 
     async handleFileUpload(event) {
