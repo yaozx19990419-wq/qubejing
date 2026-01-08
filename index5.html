@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ClearBG AI - 100% Free Batch Background Remover & Editor</title>
+    <title>
+      Free AI Background Remover: Batch Process & HD Download | ClearBG AI
+    </title>
     <meta
       name="description"
-      content="Remove image backgrounds in 5 seconds. Change backgrounds, batch process, and download HD. 100% Free."
+      content="ClearBG AI is a 100% free online tool to remove image backgrounds in seconds. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks."
     />
 
     <!-- Open Graph / Facebook -->
@@ -18,7 +20,7 @@
     />
     <meta
       property="og:description"
-      content="Remove image backgrounds in 5 seconds with AI. Change backgrounds, batch process up to 10 files, and download HD results. Completely free, no registration required."
+      content="ClearBG AI is a 100% free online tool to remove image backgrounds in seconds. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks."
     />
     <meta property="og:image" content="https://clearbg.ai/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -33,7 +35,7 @@
     />
     <meta
       name="twitter:description"
-      content="Remove image backgrounds in 5 seconds with AI. Change backgrounds, batch process up to 10 files, and download HD results. Completely free!"
+      content="ClearBG AI is a 100% free online tool to remove image backgrounds in seconds. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks."
     />
     <meta name="twitter:image" content="https://clearbg.ai/twitter-image.jpg" />
     <meta name="twitter:site" content="@clearbgai" />
@@ -87,7 +89,7 @@
               "width": 512,
               "height": 512
             },
-            "description": "100% Free AI-powered background remover. Remove image backgrounds in 5 seconds, batch process up to 10 files, and download HD results.",
+            "description": "ClearBG AI is a 100% free online tool to remove image backgrounds in seconds. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks.",
             "foundingDate": "2024",
             "contactPoint": {
               "@type": "ContactPoint",
@@ -101,7 +103,7 @@
             "@id": "https://clearbg.ai/#webapp",
             "name": "ClearBG AI Background Remover",
             "url": "https://clearbg.ai",
-            "description": "Free online background remover using AI. Upload images, remove backgrounds automatically, change backgrounds, and batch process multiple files.",
+            "description": "ClearBG AI is a 100% free online tool to remove image backgrounds in seconds. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks.",
             "applicationCategory": "WebApplication",
             "operatingSystem": "Web Browser",
             "browserRequirements": "Modern web browser with JavaScript enabled",
@@ -237,9 +239,9 @@
         <p
           class="text-lg md:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto mb-10"
         >
-          Stop paying for background removal. Instantly remove,change, or batch
-          process images with professional AI accuracy. 100% free, no sign-up,
-          no watermarks.
+          ClearBG AI is a 100% free online tool to remove image backgrounds in
+          seconds. Batch process multiple photos, create transparent
+          backgrounds, and export in HD. No sign-up, no watermarks.
         </p>
 
         <div class="relative max-w-7xl mx-auto animate-float">
@@ -855,19 +857,71 @@
     </section>
 
     <footer class="bg-black py-12">
-      <div
-        class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-300"
-      >
-        <div class="font-bold text-white text-lg font-sans">ClearBG AI</div>
-        <div class="flex gap-6">
-          <a href="privacy.html" class="hover:text-white transition-colors"
-            >Privacy Policy</a
-          >
-          <a href="about.html" class="hover:text-white transition-colors"
-            >About Us</a
-          >
+      <div class="max-w-7xl mx-auto px-4">
+        <!-- Social Share Section -->
+        <div class="text-center mb-8">
+          <h3 class="text-white font-semibold mb-4">Share ClearBG AI</h3>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <button
+              @click="shareOnFacebook"
+              class="w-12 h-12 bg-[#1877f2] hover:bg-[#166fe5] text-white rounded-full flex items-center justify-center transition-all hover:scale-110"
+              title="Share on Facebook"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+            </button>
+            <button
+              @click="shareOnTwitter"
+              class="w-12 h-12 bg-black hover:bg-gray-800 text-white rounded-full flex items-center justify-center transition-all hover:scale-110 border border-slate-600"
+              title="Share on X (Twitter)"
+            >
+              <i class="fa-brands fa-twitter"></i>
+            </button>
+            <button
+              @click="shareOnLinkedIn"
+              class="w-12 h-12 bg-[#0077b5] hover:bg-[#005885] text-white rounded-full flex items-center justify-center transition-all hover:scale-110"
+              title="Share on LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+            </button>
+            <button
+              @click="shareOnWhatsApp"
+              class="w-12 h-12 bg-[#25d366] hover:bg-[#128c7e] text-white rounded-full flex items-center justify-center transition-all hover:scale-110"
+              title="Share on WhatsApp"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </button>
+            <button
+              @click="shareOnReddit"
+              class="w-12 h-12 bg-[#ff4500] hover:bg-[#ff6b35] text-white rounded-full flex items-center justify-center transition-all hover:scale-110"
+              title="Share on Reddit"
+            >
+              <i class="fa-brands fa-reddit-alien"></i>
+            </button>
+            <button
+              @click="shareOnTelegram"
+              class="w-12 h-12 bg-[#0088cc] hover:bg-[#006699] text-white rounded-full flex items-center justify-center transition-all hover:scale-110"
+              title="Share on Telegram"
+            >
+              <i class="fa-brands fa-telegram-plane"></i>
+            </button>
+          </div>
         </div>
-        <div>&copy; 2026 ClearBG AI.</div>
+
+        <!-- Footer Links -->
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-300 border-t border-slate-700 pt-8"
+        >
+          <div class="font-bold text-white text-lg font-sans">ClearBG AI</div>
+          <div class="flex gap-6">
+            <a href="privacy.html" class="hover:text-white transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="about.html" class="hover:text-white transition-colors"
+              >About Us</a
+            >
+          </div>
+          <div>&copy; 2026 ClearBG AI.</div>
+        </div>
       </div>
     </footer>
 

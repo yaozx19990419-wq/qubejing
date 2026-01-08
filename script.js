@@ -236,5 +236,74 @@ document.addEventListener("alpine:init", () => {
       link.click();
       document.body.removeChild(link);
     },
+
+    shareOnFacebook() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(
+        "Just used ClearBG AI to remove backgrounds from my images! It's completely free with no sign-up required. Check it out!"
+      );
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    },
+
+    shareOnTwitter() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(
+        "Just used ClearBG AI to remove backgrounds from my images! It's completely free with no sign-up required. Check it out! #ClearBG #AIBackgroundRemover"
+      );
+      window.open(
+        `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    },
+
+    shareOnLinkedIn() {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(
+        "ClearBG AI - Free AI Background Remover"
+      );
+      const summary = encodeURIComponent(
+        "Remove image backgrounds in seconds with AI. Batch process multiple photos, create transparent backgrounds, and export in HD. No sign-up, no watermarks!"
+      );
+      window.open(
+        `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    },
+
+    shareOnWhatsApp() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(
+        "Check out ClearBG AI - a completely free tool to remove image backgrounds! No sign-up required, batch processing, HD export. 🎨✨ " +
+          url
+      );
+      window.open(`https://wa.me/?text=${text}`, "_blank");
+    },
+
+    shareOnReddit() {
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(
+        "ClearBG AI - Free AI Background Remover Tool"
+      );
+      window.open(
+        `https://www.reddit.com/submit?url=${url}&title=${title}`,
+        "_blank",
+        "width=600,height=400"
+      );
+    },
+
+    shareOnTelegram() {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(
+        "🎨 ClearBG AI - Free AI Background Remover\n\nRemove image backgrounds instantly! Batch process multiple photos, create transparent backgrounds, HD export. No sign-up required!\n\n" +
+          url
+      );
+      window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank");
+    },
   }));
 });
