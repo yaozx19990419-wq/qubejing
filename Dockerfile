@@ -4,13 +4,16 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # 安装系统依赖
-RUN apt-get update && apt-get install -y --no-install-recommends \
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends -o Acquire::Retries=3 \
     libgl1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender1 \
-    && rm -rf /var/lib/apt/lists/*
+    libxrender1 && \
+    rm -rf /var/lib/apt/lists/*
 
 # 复制requirements文件
 COPY requirements.txt .
