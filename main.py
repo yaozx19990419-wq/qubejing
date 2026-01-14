@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import Response, JSONResponse
+from fastapi.responses import Response, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import io
@@ -52,6 +52,11 @@ def ensure_rembg_loaded():
 @app.get("/health")
 async def health():
     return JSONResponse({"status": "ok"})
+
+# 根路径返回 index.html（使自定义域访问根路径有内容）
+@app.get("/")
+async def root():
+    return FileResponse("index.html")
 
 # 1. 单张处理接口
 @app.post("/api/remove-bg")
