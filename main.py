@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 import io
 import zipfile
@@ -37,6 +38,39 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 静态文件挂载与显式路由，确保部署环境（如 Railway）能返回顶级静态资源
+# 挂载图片目录
+app.mount("/img", StaticFiles(directory="img"), name="img")
+
+# 显式返回顶级静态文件（与 index.html 同目录）
+@app.get("/style.css")
+async def style_css():
+    return FileResponse("style.css")
+
+@app.get("/script.js")
+async def script_js():
+    return FileResponse("script.js")
+
+@app.get("/tailwind.config.js")
+async def tailwind_config():
+    return FileResponse("tailwind.config.js")
+
+@app.get("/robots.txt")
+async def robots_txt():
+    return FileResponse("robots.txt")
+
+@app.get("/sitemap.xml")
+async def sitemap_xml():
+    return FileResponse("sitemap.xml")
+
+@app.get("/privacy.html")
+async def privacy_html():
+    return FileResponse("privacy.html")
+
+@app.get("/about.html")
+async def about_html():
+    return FileResponse("about.html")
 
 # 懒加载 rembg.remove（避免在模块导入时加载大模型，导致启动阻塞）
 _rembg_remove = None

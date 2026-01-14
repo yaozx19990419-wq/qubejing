@@ -1,4 +1,4 @@
-document.addEventListener("alpine:init", () => {
+function registerAppData() {
   Alpine.data("appData", () => ({
     mode: "demo", // 'demo', 'single', 'batch'
     sliderValue: 50,
@@ -303,4 +303,10 @@ document.addEventListener("alpine:init", () => {
       window.open(`https://t.me/share/url?url=${url}&text=${text}`, "_blank");
     },
   }));
-});
+}
+
+if (window.Alpine && typeof window.Alpine.data === "function") {
+  registerAppData();
+} else {
+  document.addEventListener("alpine:init", registerAppData);
+}
