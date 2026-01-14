@@ -6,24 +6,24 @@
 
   <!-- Homepage - Highest Priority -->
   <url>
-    <loc>https://clearbg.ai/</loc>
-    <lastmod>2024-12-19</lastmod>
+    <loc>https://clearbg.tech/</loc>
+    <lastmod>2026-1-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- About Us Page -->
   <url>
-    <loc>https://clearbg.ai/about.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <loc>https://clearbg.tech/about.html</loc>
+    <lastmod>2026-1-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Privacy Policy Page -->
   <url>
-    <loc>https://clearbg.ai/privacy.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <loc>https://clearbg.tech/privacy.html</loc>
+    <lastmod>2026-1-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

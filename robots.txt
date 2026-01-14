@@ -8,7 +8,7 @@ Disallow: /tmp/
 Disallow: /logs/
 
 # Sitemap location
-Sitemap: https://clearbg.ai/sitemap.xml
+Sitemap: https://clearbg.tech/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1

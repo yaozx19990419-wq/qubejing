@@ -1,0 +1,18 @@
+# Railway 环境变量配置示例
+# 在 Railway Dashboard 的 Variables 页面中添加这些变量
+
+ENVIRONMENT=production
+HOST=0.0.0.0
+# PORT 由 Railway 自动设置，无需配置
+
+# CORS 配置 - 替换为你的域名
+CORS_ORIGINS=["https://clearbg.tech", "https://www.clearbg.tech"]
+
+# 文件大小限制 (MB)
+MAX_FILE_SIZE_MB=10
+
+# 批量处理限制
+MAX_BATCH_SIZE=10
+
+# 日志级别
+LOG_LEVEL=INFO

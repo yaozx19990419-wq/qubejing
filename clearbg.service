@@ -1,0 +1,26 @@
+[Unit]
+Description=ClearBG AI Background Removal Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/your/app
+Environment=PATH=/path/to/your/venv/bin
+Environment=ENVIRONMENT=production
+ExecStart=/path/to/your/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=5
+
+# 安全设置
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+# 资源限制
+MemoryLimit=2G
+CPUQuota=200%
+
+[Install]
+WantedBy=multi-user.target
