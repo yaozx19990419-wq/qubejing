@@ -7,19 +7,19 @@ import zipfile
 import os
 from typing import List  # 引入 List 类型
 import logging
-from pydantic import BaseSettings
+import os
 
-# 配置类
-class Settings(BaseSettings):
-    environment: str = "development"
-    host: str = "0.0.0.0"
-    port: int = int(os.getenv("PORT", "8000"))  # Railway 会设置 PORT
-    cors_origins: list = ["*"]
-    max_file_size_mb: int = 10
-    max_batch_size: int = 10
-
-    class Config:
-        env_file = ".env"
+# 配置类（简化，避免对 pydantic 版本的依赖）
+class Settings:
+    def __init__(self):
+        self.environment = os.getenv("ENVIRONMENT", "development")
+        self.host = "0.0.0.0"
+        self.port = int(os.getenv("PORT", "8000"))  # Railway 会设置 PORT
+        cors = os.getenv("CORS_ORIGINS", "")
+        # 如果需要多个 origin，用逗号分隔；默认允许所有
+        self.cors_origins = cors.split(",") if cors else ["*"]
+        self.max_file_size_mb = int(os.getenv("MAX_FILE_SIZE_MB", "10"))
+        self.max_batch_size = int(os.getenv("MAX_BATCH_SIZE", "10"))
 
 settings = Settings()
 
