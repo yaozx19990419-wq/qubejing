@@ -185,7 +185,7 @@ function registerAppData() {
       link.click();
     },
 
-    // 【新增】一键复制到剪贴板
+    // 【新增】一键复制到剪贴板（支持透明 PNG 和 HTML 回退）
     async copyImage() {
       try {
         const img = new Image();
@@ -198,21 +198,48 @@ function registerAppData() {
         canvas.height = img.height;
         const ctx = canvas.getContext("2d");
 
-        // 如果有背景色，先画背景
-        if (this.bgColor !== "transparent") {
-          ctx.fillStyle = this.bgColor;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+        // 先绘制透明版（不填背景）到 canvasA
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
-        canvas.toBlob(async (blob) => {
-          await navigator.clipboard.write([
-            new ClipboardItem({ "image/png": blob }),
-          ]);
-          // 按钮反馈动画
-          this.copyBtnText = "Copied!";
-          setTimeout(() => (this.copyBtnText = "Copy"), 2000);
+        // 获取透明 PNG blob
+        const alphaBlob = await new Promise((resolve) =>
+          canvas.toBlob(resolve, "image/png")
+        );
+
+        // 再创建一个带白色背景的 canvas（回退用）
+        const canvasFallback = document.createElement("canvas");
+        canvasFallback.width = img.width;
+        canvasFallback.height = img.height;
+        const ctxF = canvasFallback.getContext("2d");
+        // 使用用户选择的背景色作为回退色（透明时默认白色）
+        const fallbackBg = this.bgColor === "transparent" ? "#ffffff" : this.bgColor;
+        ctxF.fillStyle = fallbackBg;
+        ctxF.fillRect(0, 0, canvasFallback.width, canvasFallback.height);
+        ctxF.drawImage(img, 0, 0);
+        const fallbackBlob = await new Promise((resolve) =>
+          canvasFallback.toBlob(resolve, "image/png")
+        );
+
+        // 构造 HTML 回退片段，使用带白背景的 data URL，很多桌面应用会选择 HTML 格式粘贴
+        const fallbackDataUrl = await new Promise((resolve) =>
+          canvasFallback.toDataURL("image/png")
+            ? resolve(canvasFallback.toDataURL("image/png"))
+            : resolve(null)
+        );
+        const htmlString = `<html><body style="margin:0;padding:0;background:${fallbackBg}"><img src="${fallbackDataUrl}" style="display:block;max-width:100%"/></body></html>`;
+        const htmlBlob = new Blob([htmlString], { type: "text/html" });
+
+        // 写入剪贴板：尽量同时提供透明 PNG 与 HTML 回退
+        const clipboardItem = new ClipboardItem({
+          "image/png": alphaBlob,
+          "text/html": htmlBlob,
         });
+
+        await navigator.clipboard.write([clipboardItem]);
+
+        this.copyBtnText = "Copied!";
+        setTimeout(() => (this.copyBtnText = "Copy"), 2000);
       } catch (err) {
         console.error(err);
         alert("Copy failed. Try downloading instead.");
