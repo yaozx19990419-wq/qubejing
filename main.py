@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi import HTTPException
 import uvicorn
 import io
 import zipfile
@@ -9,6 +10,7 @@ import os
 from typing import List  # 引入 List 类型
 import logging
 import os
+from pathlib import Path
 
 # 配置类（简化，避免对 pydantic 版本的依赖）
 class Settings:
@@ -44,33 +46,55 @@ app.add_middleware(
 app.mount("/img", StaticFiles(directory="img"), name="img")
 
 # 显式返回顶级静态文件（与 index.html 同目录）
+BASE_DIR = Path(__file__).resolve().parent
+
+
+def _file_response_if_exists(rel_path: str):
+    target = BASE_DIR / rel_path
+    if target.exists():
+        return FileResponse(str(target))
+    raise HTTPException(status_code=404, detail="Not Found")
+
+
 @app.get("/style.css")
 async def style_css():
-    return FileResponse("style.css")
+    return _file_response_if_exists("style.css")
+
 
 @app.get("/script.js")
 async def script_js():
-    return FileResponse("script.js")
+    return _file_response_if_exists("script.js")
+
 
 @app.get("/tailwind.config.js")
 async def tailwind_config():
-    return FileResponse("tailwind.config.js")
+    return _file_response_if_exists("tailwind.config.js")
+
 
 @app.get("/robots.txt")
 async def robots_txt():
-    return FileResponse("robots.txt")
+    return _file_response_if_exists("robots.txt")
+
 
 @app.get("/sitemap.xml")
 async def sitemap_xml():
-    return FileResponse("sitemap.xml")
+    return _file_response_if_exists("sitemap.xml")
+
 
 @app.get("/privacy.html")
 async def privacy_html():
-    return FileResponse("privacy.html")
+    return _file_response_if_exists("privacy.html")
+
 
 @app.get("/about.html")
 async def about_html():
-    return FileResponse("about.html")
+    return _file_response_if_exists("about.html")
+
+
+# Generic handler for *.html requests (fallback)
+@app.get("/{page}.html")
+async def serve_html(page: str):
+    return _file_response_if_exists(f"{page}.html")
 
 # 懒加载 rembg.remove（避免在模块导入时加载大模型，导致启动阻塞）
 _rembg_remove = None
