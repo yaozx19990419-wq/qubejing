@@ -5,6 +5,7 @@ function registerAppData() {
     isProcessing: false,
     processingText: "AI is processing magic...",
     batchCount: 0,
+    batchComplete: false,
 
     // 【新增】背景颜色控制
     bgColor: "transparent", // 默认透明
@@ -28,6 +29,7 @@ function registerAppData() {
       this.$refs.fileInput.value = "";
       this.images.original = "img/1766567900471.jpg";
       this.images.processed = "img/1766567900471-ClearBG.png";
+      this.batchComplete = false;
     },
 
     async handleFileUpload(event) {
@@ -116,6 +118,8 @@ function registerAppData() {
         if (!response.ok) throw new Error("Batch failed");
 
         this.batchZipBlob = await response.blob();
+        // 标记批量处理完成，UI 依赖此标志显示完成卡片
+        this.batchComplete = true;
         setTimeout(
           () =>
             document
