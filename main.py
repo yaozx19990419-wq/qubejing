@@ -95,10 +95,15 @@ async def root():
 # 1. 单张处理接口
 @app.post("/api/remove-bg")
 async def remove_background(file: UploadFile = File(...)):
-    image_data = await file.read()
-    ensure_rembg_loaded()
-    output_data = _rembg_remove(image_data)
-    return Response(content=output_data, media_type="image/png")
+    try:
+        logger.info(f"Received single file: {file.filename}")
+        image_data = await file.read()
+        ensure_rembg_loaded()
+        output_data = _rembg_remove(image_data)
+        return Response(content=output_data, media_type="image/png")
+    except Exception:
+        logger.exception("remove-bg failed")
+        return Response(content="Internal server error", status_code=500)
 
 # 2. 批量处理接口 (返回 ZIP)
 @app.post("/api/remove-bg-batch")
@@ -115,17 +120,22 @@ async def remove_background_batch(files: List[UploadFile] = File(...)):
     zip_buffer = io.BytesIO()
 
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        ensure_rembg_loaded()
-        for file in files:
-            # 读取图片
-            image_data = await file.read()
-            # AI 处理
-            output_data = _rembg_remove(image_data)
-            # 生成新文件名 (原名.png)
-            original_name = os.path.splitext(file.filename)[0]
-            new_filename = f"{original_name}-ClearBG.png"
-            # 写入 ZIP
-            zip_file.writestr(new_filename, output_data)
+        try:
+            logger.info(f"Received batch of {len(files)} files")
+            ensure_rembg_loaded()
+            for file in files:
+                # 读取图片
+                image_data = await file.read()
+                # AI 处理
+                output_data = _rembg_remove(image_data)
+                # 生成新文件名 (原名.png)
+                original_name = os.path.splitext(file.filename)[0]
+                new_filename = f"{original_name}-ClearBG.png"
+                # 写入 ZIP
+                zip_file.writestr(new_filename, output_data)
+        except Exception:
+            logger.exception("remove-bg-batch failed")
+            return Response(content="Internal server error", status_code=500)
 
     # 指针归零，准备发送
     zip_buffer.seek(0)

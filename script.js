@@ -76,7 +76,7 @@ function registerAppData() {
       formData.append("file", file);
 
       try {
-        const response = await fetch("http://localhost:8000/api/remove-bg", {
+        const response = await fetch("/api/remove-bg", {
           method: "POST",
           body: formData,
         });
@@ -108,13 +108,10 @@ function registerAppData() {
       }
 
       try {
-        const response = await fetch(
-          "http://localhost:8000/api/remove-bg-batch",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+        const response = await fetch("/api/remove-bg-batch", {
+          method: "POST",
+          body: formData,
+        });
 
         if (!response.ok) throw new Error("Batch failed");
 
