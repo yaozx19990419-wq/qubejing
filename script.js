@@ -66,6 +66,8 @@ function registerAppData() {
         this.mode = "batch";
         this.batchCount = files.length;
         this.processingText = `Processing ${files.length} images...`;
+        // reset batchComplete flag when starting a new batch
+        this.batchComplete = false;
         await this.processBatch(files);
       }
     },
@@ -104,6 +106,8 @@ function registerAppData() {
     },
 
     async processBatch(files) {
+      // ensure batchComplete is false at the start of processing
+      this.batchComplete = false;
       const formData = new FormData();
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
