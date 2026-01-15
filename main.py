@@ -78,9 +78,16 @@ _rembg_remove = None
 def ensure_rembg_loaded():
     global _rembg_remove
     if _rembg_remove is None:
-        # 在函数体内导入，首次调用时会加载模型
-        from rembg import remove as _remove_fn
-        _rembg_remove = _remove_fn
+        try:
+            logger.info("Loading rembg model...")
+            # 在函数体内导入，首次调用时会加载模型
+            from rembg import remove as _remove_fn
+            _rembg_remove = _remove_fn
+            logger.info("rembg model loaded")
+        except Exception:
+            logger.exception("Failed to load rembg model")
+            # keep _rembg_remove as None so callers know loading failed
+            _rembg_remove = None
 
 # 轻量健康检查接口，不触发 rembg 加载
 @app.get("/health")
@@ -98,9 +105,21 @@ async def remove_background(file: UploadFile = File(...)):
     try:
         logger.info(f"Received single file: {file.filename}")
         image_data = await file.read()
+
+        # 尝试确保 rembg 可用
         ensure_rembg_loaded()
-        output_data = _rembg_remove(image_data)
-        return Response(content=output_data, media_type="image/png")
+
+        if _rembg_remove is None:
+            logger.warning("rembg not available, returning original file as fallback")
+            # 返回原始文件字节作为回退（保留原 content_type）
+            return Response(content=image_data, media_type=file.content_type or "application/octet-stream")
+
+        try:
+            output_data = _rembg_remove(image_data)
+            return Response(content=output_data, media_type="image/png")
+        except Exception:
+            logger.exception("rembg processing failed for single file, returning original as fallback")
+            return Response(content=image_data, media_type=file.content_type or "application/octet-stream")
     except Exception:
         logger.exception("remove-bg failed")
         return Response(content="Internal server error", status_code=500)
@@ -120,22 +139,34 @@ async def remove_background_batch(files: List[UploadFile] = File(...)):
     zip_buffer = io.BytesIO()
 
     with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        try:
-            logger.info(f"Received batch of {len(files)} files")
-            ensure_rembg_loaded()
-            for file in files:
+        logger.info(f"Received batch of {len(files)} files")
+        ensure_rembg_loaded()
+        for file in files:
+            try:
                 # 读取图片
                 image_data = await file.read()
-                # AI 处理
-                output_data = _rembg_remove(image_data)
-                # 生成新文件名 (原名.png)
-                original_name = os.path.splitext(file.filename)[0]
-                new_filename = f"{original_name}-ClearBG.png"
-                # 写入 ZIP
-                zip_file.writestr(new_filename, output_data)
-        except Exception:
-            logger.exception("remove-bg-batch failed")
-            return Response(content="Internal server error", status_code=500)
+
+                # 如果 rembg 无法使用，直接把原始文件写入 ZIP 作为回退
+                if _rembg_remove is None:
+                    logger.warning("rembg not available, adding original file to zip as fallback")
+                    original_name = os.path.splitext(file.filename)[0]
+                    new_filename = f"{original_name}-Original{os.path.splitext(file.filename)[1] or '.png'}"
+                    zip_file.writestr(new_filename, image_data)
+                    continue
+
+                # 尝试 AI 处理
+                try:
+                    output_data = _rembg_remove(image_data)
+                    original_name = os.path.splitext(file.filename)[0]
+                    new_filename = f"{original_name}-ClearBG.png"
+                    zip_file.writestr(new_filename, output_data)
+                except Exception:
+                    logger.exception("rembg failed for one file in batch, adding original as fallback")
+                    original_name = os.path.splitext(file.filename)[0]
+                    new_filename = f"{original_name}-Original{os.path.splitext(file.filename)[1] or '.png'}"
+                    zip_file.writestr(new_filename, image_data)
+            except Exception:
+                logger.exception("Failed to read/process one file in batch; skipping")
 
     # 指针归零，准备发送
     zip_buffer.seek(0)
