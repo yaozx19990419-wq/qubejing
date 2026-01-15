@@ -8,6 +8,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends -o Acquire::Retries=3 \
+    build-essential gcc g++ make curl ca-certificates \
+    libffi-dev libssl-dev \
+    libjpeg-dev zlib1g-dev \
     libgl1 \
     libglib2.0-0 \
     libsm6 \
@@ -33,9 +36,13 @@ COPY robots.txt .
 COPY sitemap.xml .
 COPY img/ img/
 
-# 创建非root用户
+# 在构建期预下载 rembg 模型到镜像内，避免运行时再下载（注意：会增大镜像体积）
 RUN useradd --create-home --shell /bin/bash app \
-    && chown -R app:app /app
+    && mkdir -p /home/app/.u2net \
+    && curl -L -o /home/app/.u2net/u2net.onnx "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx" \
+    && chown -R app:app /home/app /app
+
+# 切换到非root用户
 USER app
 
 # 暴露端口
