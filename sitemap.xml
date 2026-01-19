@@ -7,7 +7,7 @@
   <!-- Homepage - Highest Priority -->
   <url>
     <loc>https://clearbg.tech/</loc>
-    <lastmod>2026-1-14</lastmod>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- About Us Page -->
   <url>
     <loc>https://clearbg.tech/about.html</loc>
-    <lastmod>2026-1-14</lastmod>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- Privacy Policy Page -->
   <url>
     <loc>https://clearbg.tech/privacy.html</loc>
-    <lastmod>2026-1-14</lastmod>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
